@@ -1,0 +1,73 @@
+<!--
+Author: Team32
+File: patSum.ejs
+Purpose: Main page leading to patient summary
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header Defintion-->
+<head>
+	<title>EMBR</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">
+					<span id='color-one'>EM</span><span id='color-two'>BR</span>
+				</a>
+			</div>
+			<ul class="nav navbar-nav initialSlideIn">
+				<li class='active'><a href=#>Patient summary</a></li>
+				<li><a href=#>Appointment summary</a></li>
+				<li><a href=#>Prescription summary</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+	<!-- Body Content Definition-->
+	<div class='container-fluid'>
+		<div class="row text-center">
+			<div class='col-md-12 col-sm-12' id='section1'>
+					<div id='section1-content'>
+						<h2>Experience Electronic Medical BlockChain Records  <img src='../images/EMBR-logo.png' width ='100px' alt='logo'/> </h2>
+						<h4 class='row text-center margin-top-medium'> Link Your Patient to Begin</h4>
+					</div>
+					<form action='patDisp' method='post'>
+						<div class='row text-center margin-top-medium'>
+							<div id='login-main'>
+								<i class='fa fa-user-circle fa-lg' aria-hidden="true"></i>
+								<input name='name' type='text' placeholder='First Name' id='username' />
+								<input name='name' type='text' placeholder='Last Name' id='username'/>
+								<br/>
+								<input name='name' type='text' placeholder='MRN' id='mrn'/>
+	
+							</div>
+						</div>
+						<div class='row text-center margin-top-medium'>
+							<button id='login-button' type='submit'><i class='glyphicon glyphicon-log-in'></i></button>
+						</div>
+					</form>
+				<div class='row footer'>
+					<h4>A project by <a href='https://blockchainmedicalrecords.github.io' target="_blank"><span id='color-one'>UNR CSE 2020 </span><span id='color-two'>Team 32</span></a> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <script type="text/javascript " src="js/patSum.js "></script> 
+	<script type="text/javascript " src="js/main.js "></script>
+</body>
+</html>

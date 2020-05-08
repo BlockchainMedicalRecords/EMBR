@@ -1,0 +1,134 @@
+<!--
+Author: Team32
+File: patDisp.ejs
+Purpose: Display patient summary and path to recovery
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header Content -->
+<head>
+	<title>EMBR</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body id='patientPage'>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">
+					<span id='color-one'>EM</span><span id='color-two'>BR</span>
+				</a>
+			</div>
+			<ul class="nav navbar-nav initialSlideIn">
+				<li class='active'><a href="#">Patient summary</a></li>
+				<li><a href="#">Appointment summary</a></li>
+            <li><a href="#">Prescription summary</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class='container-fluid'>
+		<div class='row' id='header-section'>
+			<div class='col-md-2 col-sm-2'>
+				<div id='face-picture'>
+					<img src='../images/fauci.png' width='120px' class='img-responsive' />
+				</div>
+			</div>
+			<div class='col-md-5 col-sm-5'>
+				<div id='name-and-role'>
+					<h2>Fauci, Anthony</h2>
+					<h4>Occupation: Scientist</h4>
+				</div>
+			</div>
+			<div class = 'col-md-5 col-sm-5'>
+				<div id='historyList'>
+					<h2>Patient Summary</h2>
+					<h4>Gender: Male</h4>
+					<h4>Age: 79</h4>
+					<h4>Race: White</h4>
+					<h4>Birth: 12/24/1940</h4>
+					<h4>Address: 123 Health St, Washington, D.C</h4>
+					<h4>MRN: 000444 </h4>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Body Content -->
+	<form id='pHistory' method="POST" action="/transVerif">
+		<input type="hidden" name="name" value="">
+		<div class='container-fluid' id='patient-info'>
+			<div class='row'>
+				<div class='col-md-5 col-md-offset-1' id='drugs'>
+					<!-- Medical History -->
+					<h2> Medical History </h2>
+					<ul>
+						<li> Surgery Recommended (5/1): Punctured lung needs to be repaired</li>
+						<li> Emergency Visit (5/1):UMC Health for upper respritory issues</li>
+						<li> Health Check-up (4/19): Anthony displayed a high bp of 95/115, will follow up</li>
+						<li> Emergency Visit (4/10): Blood sugar low, placed on fluids for three days</li>
+						<li> New Patient Visit (4/2): Anthony relocated to Las Vegas, changed providers</li>
+
+					</ul>
+				</div>
+
+				<!--- Path to Recovery -->
+				<div class='col-md-6 col-sm-6'>
+					<h2> Identify Path to Recovery</h2>
+					<select name='reccomendation' id='diseases' required>
+						<optgroup label='Prescribe'>
+							<option value='' disabled selected hidden>Course of Action...</option>
+							<option value='Hepatitis'>Prescribe for Hepatitis</option>
+							<option value='Hypothyroidism'>Prescribe for Hypothyroidism</option>
+							<option value='Coronary Atherosclerosis'>Prescribe for Coronary Atherosclerosis</option>
+						</optgroup>
+						<optgroup label='Surgery'>
+							<option value='Depression'>Suggest Open Heart surgery</option>
+							<option value='Diabetes'>Suggest Torn ACL surgery</option>
+						</optgroup>
+					</select>
+				</div>
+			</div>
+			
+			<!-- Prescription History -->
+			<div class='row'>
+				<div class='col-md-5 col-md-offset-1' id='drugs'>
+					<h2> Prescription History </h2>
+					<ul>
+						<li> Prinivil Filled #30x2 (5/1): Last Refill #30x2 (4/1) </li>
+						<li> Humulin Filled #600x1  (4/19): Last Refill #600x1 (3/19)</li>
+						<li> Vicodin Filled #25x1 (4/3): First fill</li>
+						<li> Lisinopril Filled #300x3 (4/2): Last Refill #300x3 (3/2)</li>
+						<li> Lipitor Filed #70x1 (3/30): First fill </li>
+					</ul>
+				</div>
+			</div>
+			
+					</ul>
+				</div>
+			</div>
+			
+			<div class='row'>
+				<div class='col-md-3 col-sm-3 pull-right'>
+					<button id='submitToDoctor' type='submit'>Continue<i class='glyphicon glyphicon-chevron-right'></i></button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class='filler'></div>
+	
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- <script type="text/javascript " src="js/patDisp.js "></script> -->
+	<script type="text/javascript " src="js/main.js "></script>
+</body>
+
+</html>
