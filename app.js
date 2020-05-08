@@ -32,15 +32,6 @@ app.use(function(req, res, next) {
 	next();
 })
 
-app.post('/solve', function(req, res) {
-	console.log('****** PROCESS *******');
-	console.log(drug1 + ' / ' + drug2);
-	res.render('solve.ejs', {
-		duplicateArray,
-	});
-});
-
-
 
 app.engine('html', require('ejs').renderFile);
 
@@ -56,7 +47,7 @@ app.get('/patSum', function(req, res) {
 })
 
 app.post('/patDisp', function(req, res) {
-	console.log("the patient I am looking for in the db: " + req.body.name);
+	console.log("Finding patient" + req.body.name);
 	patient = req.body.name;
 	Patient.find({
 		"name": req.body.name
@@ -69,7 +60,7 @@ app.post('/patDisp', function(req, res) {
 });
 
 app.post('/transVerif', function(req, res) {
-	console.log("*************doctor main *******");
+	console.log("Doctor");
 	console.log(req.body);
 
 	doctor = "1";
@@ -83,7 +74,7 @@ app.post('/transVerif', function(req, res) {
 	var update = {
 		$push: {
 			diseases: req.body.disease1,
-			comments: "Appointment booked",
+			comments: "Booked appointment",
 		}
 	};
 
@@ -91,7 +82,7 @@ app.post('/transVerif', function(req, res) {
 		"name": req.body.name
 	}, update, options, function(err, doc) {
 		if (err) {
-			console.log('got an error ' + err);
+			console.log('error' + err);
 		} else {
 			console.log('saved');
 		}
@@ -101,12 +92,12 @@ app.post('/transVerif', function(req, res) {
 		"name": req.body.name
 	}, {}, function(err, doc) {
 		if (err) {
-			console.log('got an error ' + err);
+			console.log('error' + err);
 		}
 	});
 
 	query.then(function(doc2) {
-		console.log("patient found to add to doctor: " + doc2);
+		console.log("patient found" + doc2);
 
 		var update2 = {
 			$push: {
@@ -118,7 +109,7 @@ app.post('/transVerif', function(req, res) {
 			"name": doctor
 		}, update2, options, function(err, doc) {
 			if (err) {
-				console.log('got an error ' + err);
+				console.log('error' + err);
 			} else {
 				console.log('saved');
 
@@ -135,14 +126,14 @@ app.post('/transVerif', function(req, res) {
 });
 
 app.post('/docDisp', function(req, res) {
-	console.log("the patient I am looking for in the db: " + patient);
+	console.log("finding patient" + patient);
 
 
 	var query = Patient.findOne({
 		"name": patient
 	}, {}, function(err, doc) {
 		if (err) {
-			console.log('got an error ' + err);
+			console.log('error' + err);
 
 		}
 	})
@@ -150,14 +141,14 @@ app.post('/docDisp', function(req, res) {
 
 	query.then(function(doc) {
 
-		console.log("doc for doctor-info" + doc);
+		console.log("doctor" + doc);
 
 
 		var query2 = Doctor.findOne({
 			"name": doctor
 		}, {}, function(err, doc) {
 			if (err) {
-				console.log('got an error ' + err);
+				console.log('error' + err);
 			}
 		})
 
@@ -180,14 +171,14 @@ app.post('/pharmDisp', function(req, res) {
 	console.log("***** Body: %j", req.body);
    var comments = req.body.comments;
 
-	console.log("the patient I am looking for in the db: " + patient);
-	console.log("doctor is " + doctor);
+	console.log("finding patient" + patient);
+	console.log("doctor " + doctor);
 
 	var query3 = Doctor.findOne({
 		"name": doctor
 	}, "name age patients", function(err, doc) {
 		if (err) {
-			console.log('got an error ' + err);
+			console.log('error' + err);
 		}
 	})
 
@@ -202,7 +193,7 @@ app.post('/pharmDisp', function(req, res) {
 		var update2 = {
 			$push: {
 				drugs: { $each: [drug1, drug2] },
-				comments: { $each: ["Prescription added: " + drug1 + " " + drug2, comments] },
+				comments: { $each: ["Prescription " + drug1 + " " + drug2, comments] },
 			}
 		};
 
@@ -210,9 +201,9 @@ app.post('/pharmDisp', function(req, res) {
 			"name": patient
 		}, update2, options, function(err, doc) {
 			if (err) {
-				console.log('got an error ' + err);
+				console.log('error' + err);
 			} else {
-				console.log('Patient found and saved');
+				console.log('Patient found');
 			}
 		});
 
@@ -230,22 +221,22 @@ app.post('/pharmDisp', function(req, res) {
 			"name": pharmacist
 		}, update2, options, function(err, doc) {
 			if (err) {
-				console.log('got an error ' + err);
+				console.log('error' + err);
 			} else {
-				console.log('Pharmacist found and saved');
+				console.log('Pharmacist found');
 
-				console.log("namw: " + doc.customers[0].patient);
+				console.log("name: " + doc.customers[0].patient);
 
 				var query4 = Patient.findById(
 					doc.customers[0].patient,
 					function(err, doc3) {
 						if (err) {
-							console.log('got an error ' + err);
+							console.log('error' + err);
 						}
 						patient = doc3;
 					})
 					.then(function(doc3) {
-						console.log('****PATIENT*****');
+						console.log('Patient');
 						for (var i = 0; i < patient.drugs.length; i++) {
 							for (var j = i + 1; j < patient.drugs.length; j++) {
 								if (patient.drugs[i] === patient.drugs[j]) {
@@ -262,7 +253,7 @@ app.post('/pharmDisp', function(req, res) {
 						doc3.save(function(err, doc) {
 							if (err) return handleError(err);
 						});
-						console.log('DUP ARRAY ****');
+						console.log('Duplicate arr');
 						console.log(duplicateArray);
 						res.render('pharmDisp.ejs', {
 							drug1,
@@ -279,9 +270,6 @@ app.post('/pharmDisp', function(req, res) {
 });
 
 var appEnv = cfenv.getAppEnv();
-// console.log(appEnv);
-// start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
-	// print a message when the server starts listening
-	console.log("server starting on " + appEnv.url);
+	console.log("visit server at" + appEnv.url);
 });
